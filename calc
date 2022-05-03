@@ -1,0 +1,19 @@
+extern system ;chamando funcao system de forma externa
+global _main ;marcar pro linker saber o que eh pra copiar 
+
+section .text ;escrever o codigo em si 
+
+_main: ;marcacao de onde comeca o codigo pode ser _start tb 
+	push 0x00000000 ;push nullbyte
+	push 0x6578652e ;.exe
+	push 0x636c6163 ;calc
+	push 0x20632f20 ;/c
+	push 0x20657865 ;exe
+	push 0x2e646d63 ;.cmd  
+	push esp ;colocar esp na stack
+	pop eax ;trazer o que estiver no top da stack e tacar isso pra eax
+	push eax ;faz o push eax (coloca o endereco da func system e move pra ebx) e chama ebx
+	mov ebx, 0x769f4720 ;system
+	call ebx ;chamadass
+
+
